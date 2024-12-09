@@ -16,9 +16,10 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
-      <h1>Hello World From vite</h1>
+      <h1>Hello World From Aparecida de Goiânia</h1>
     </>
   )
 }
 
-export default App
+export default App;
+
