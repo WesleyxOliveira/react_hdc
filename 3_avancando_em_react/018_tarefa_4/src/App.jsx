@@ -13,7 +13,11 @@ function App() {
 
   return (
     <>
-      <UserDetails {people.map((person)=> ())}/>
+      {
+        people.map((person, i)=> (
+          <UserDetails key={i} name={person.name} age={person.age} profession={person.profession}/>
+        ))
+      }
     </>
   )
 }
