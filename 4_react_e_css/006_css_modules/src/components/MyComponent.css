@@ -1,0 +1,12 @@
+
+/*Este estilo vazou para o app.jsx*/
+p {
+    color: green;
+    background-color: black;
+}
+
+/*Este não vazou pois está mais bem especificado*/
+.my-comp-paragraph {
+    color: black;
+    background-color: gold;
+}
