@@ -19,10 +19,6 @@ const MyForm = ({user}) => {
         e.preventDefault();
         console.log(name);
         console.log(email);
-
-        // 7 - Limpar formulário
-        setName('');
-        setEmail('');
     }
 
     return (        
@@ -37,7 +33,7 @@ const MyForm = ({user}) => {
                 <label>
                     <span>E-mail</span>
                     {/* 4 - Simplificação de manipulação de state */}
-                    <input type="email" name="email" onChange={(e)=> setEmail(e.target.value)} autoComplete='off' value={email} placeholder='Digite seu e-mail'/>
+                    <input type="email" name="email" onChange={(e)=> setEmail(e.target.value)} autoComplete='off' value={email}/>
                 </label>
 
                 <input type="submit" value="Enviar"/>
