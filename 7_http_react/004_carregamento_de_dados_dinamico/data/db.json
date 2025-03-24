@@ -1,0 +1,49 @@
+{
+  "products": [
+    {
+      "id": "1",
+      "name": "Camisa",
+      "price": 59.9
+    },
+    {
+      "id": "2",
+      "name": "Calça vermelha",
+      "price": 90
+    },
+    {
+      "id": "3",
+      "name": "Boné aba reta",
+      "price": 29.9
+    },
+    {
+      "id": "45aa",
+      "name": "teste",
+      "price": "12"
+    },
+    {
+      "id": "2391",
+      "name": "capa de chuva",
+      "price": "50.50"
+    },
+    {
+      "id": "c35b",
+      "name": "tenis",
+      "price": "500"
+    },
+    {
+      "id": "9f25",
+      "name": "chuteira",
+      "price": "100.00"
+    },
+    {
+      "id": "5cae",
+      "name": "Tenis de corrida",
+      "price": "1.000"
+    },
+    {
+      "id": "b6c9",
+      "name": "cadeira",
+      "price": "150"
+    }
+  ]
+}
