@@ -44,6 +44,16 @@
       "id": "b6c9",
       "name": "cadeira",
       "price": "150"
+    },
+    {
+      "id": "83ef",
+      "name": "wesley ",
+      "price": "1"
+    },
+    {
+      "id": "15a4",
+      "name": "tenis",
+      "price": "1"
     }
   ]
 }
