@@ -1,0 +1,14 @@
+{
+  "products": [
+    {
+      "id": "1",
+      "name": "Camisa",
+      "price": 59.9
+    },
+    {
+      "id": "da89",
+      "name": "poco x6 pro",
+      "price": "2100"
+    }
+  ]
+}
