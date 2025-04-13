@@ -1,29 +1,13 @@
 import './App.css'
 
-// 1 - config react router
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-
-import Home from './routes/Home';
-import About from './routes/About';
-
-const router = createBrowserRouter([
-  {
-    path:'/',
-    element: <Home />
-  },
-  {
-    path: 'about',
-    element: <About />
-  }
-])
+import { Outlet } from 'react-router-dom'
 
 function App() {
   return (
-    
-    <>
+    <div>
       <h1>React Router</h1>
-      <RouterProvider router={router}/>
-    </>
+      <Outlet />
+    </div>
   )
 }
 
