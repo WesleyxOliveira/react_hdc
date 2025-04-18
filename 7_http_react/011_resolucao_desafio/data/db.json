@@ -2,13 +2,18 @@
   "products": [
     {
       "id": "1",
-      "name": "Camisa",
+      "name": "camisa",
       "price": "59.90"
     },
     {
       "id": "2",
-      "name": "Iphone",
+      "name": "iphone",
       "price": "8.000"
+    },
+    {
+      "id": "3",
+      "name": "casaco",
+      "price": "12.90"
     }
   ]
 }
