@@ -8,10 +8,9 @@ function App() {
     <div className='App'>
       <div className="container">
         <Navbar />
-        <Outlet />
-        
-      </div>
-<Footer />
+        <Outlet />     
+      </div>      
+      <Footer />   
     </div>
   )
 }
