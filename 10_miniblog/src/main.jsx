@@ -5,7 +5,6 @@ import App from './App.jsx'
 
 import { BrowserRouter, createBrowserRouter, RouterProvider } from 'react-router-dom'
 
-
 // context
 import { AuthProvider } from './context/AuthContext.jsx'
 
