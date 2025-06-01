@@ -13,6 +13,8 @@ import Home from './routes/Home/Home.jsx'
 import About from './routes/About/About.jsx'
 import Login from './routes/Login/Login.jsx'
 import Register from './routes/Register/Register.jsx'
+import Dashboard from './routes/Dashboard/Dashboard.jsx'
+import CreatePost from './routes/CreatePost/CreatePost.jsx'
 
 // router config
 const router = createBrowserRouter([
@@ -35,7 +37,15 @@ const router = createBrowserRouter([
       {
         path: '/register',
         element: <Register />
-      }
+      },
+      {
+        path: '/posts/create',
+        element: <CreatePost />
+      },
+      {
+        path: '/dashboard',
+        element: <Dashboard />
+      }     
     ]
   }
 ])
