@@ -1,6 +1,9 @@
+import { useAuthValue } from '../../context/AuthContext';
 import { useAuthentication } from '../../hooks/useAuthentication';
 import styles from './Register.module.css'
 import { useState, useEffect } from 'react'
+
+import { Navigate } from 'react-router-dom';
 
 const Register = () => {
   const [displayname, setDisplayName] = useState('')
@@ -28,8 +31,6 @@ const Register = () => {
     }
 
     const res = await createUser(user);
-
-    console.log(user);
   }
 
   useEffect(()=> {
@@ -38,7 +39,11 @@ const Register = () => {
     }
   }, [authError])
 
-  return (
+  const { user } = useAuthValue();
+
+  console.log(user);
+
+  return  !user ? (
     <div className={styles.register}>
       <h1>Cadastre-se para postar</h1>
       <p>Crie seu usuário e compartilhe suas histórias</p>
@@ -94,7 +99,7 @@ const Register = () => {
         {error && <p className='error'>{error}</p>}
       </form>
     </div>
-  )
+  ) : <Navigate to='/' />
 }
 
 export default Register

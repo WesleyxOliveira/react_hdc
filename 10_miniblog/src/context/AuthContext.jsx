@@ -4,7 +4,7 @@ import { useAuthentication } from "../hooks/useAuthentication";
 import { onAuthStateChanged } from "firebase/auth";
 
 // cria o contexto
-const AuthContext = createContext();
+export const AuthContext = createContext();
 
 // provider que encapsula tudo
 export function AuthProvider({ children }) {

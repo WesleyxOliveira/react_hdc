@@ -8,8 +8,7 @@ import { useAuthValue } from '../context/AuthContext';
 import styles from './Navbar.module.css'
 
 const Navbar = () => {
-    const user = useAuthValue();
-    console.log(user);
+    const { user } = useAuthValue();
 
     return (
         <nav className={styles.navbar}>
