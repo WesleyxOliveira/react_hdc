@@ -48,10 +48,11 @@ export const useAuthentication = () => {
 
             return user
         } catch (error) {
+            console.log(error);
             console.log(error.message);
             console.log(typeof error.message);
 
-            let systemErrorMessage
+            let systemErrorMessage;
 
             if (error.message.includes('Password')) {
                 systemErrorMessage = 'A senha precisa conter pelo menos 6 caracteres.'
@@ -84,14 +85,14 @@ export const useAuthentication = () => {
             await signInWithEmailAndPassword(auth, data.email, data.password);
             setLoading(false)
         } catch (error) {
+            console.log(error);
+            console.log(error.message);
             let systemErrorMessage;
 
-            if(error.message.includes('user-not-found')) {
-                systemErrorMessage = 'usuário não encontrado.'
-            } else if(error.message.includes('auth/invalid-credential')) {
-                systemErrorMessage = 'Senha incorreta.'
+            if(error.message.includes('auth/invalid-credential')) {
+                systemErrorMessage = 'Usuário ou senha inválido, tente novamente.';
             } else {
-                systemErrorMessage = 'Ocorreu um erro, por favor tente mais tarde.'
+                systemErrorMessage = 'Ocorreu um erro, por favor tenta mais tarde.';
             }
 
             setError(systemErrorMessage);
