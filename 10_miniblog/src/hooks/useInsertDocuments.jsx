@@ -12,7 +12,7 @@ const insertReducer = (state, action) => {
         case 'LOADING':
             return { loading: true, error: null }
         case 'INSERTED_DOC':
-            return { loading: false: error: null }
+            return { loading: false, error: null }
         case 'ERROR':
             return { loading: false, error: action.payload }
         default:
@@ -22,7 +22,7 @@ const insertReducer = (state, action) => {
 
 export const useInsertDocument = (docCollection) => {
 
-    const [reponse, dispatch] = useReducer(insertReducer, initialState);
+    const [response, dispatch] = useReducer(insertReducer, initialState);
 
     // deal with memory leak
     const [cancelled, setCancelled] = useState(false);
@@ -42,7 +42,7 @@ export const useInsertDocument = (docCollection) => {
         try {
             const newDocument = { ...document, createdAt: Timestamp.now() }
 
-            const insertDocument = await addD(
+            const insertDocument = await addDoc(
                 collection(db, docCollection),
                 newDocument
             )
