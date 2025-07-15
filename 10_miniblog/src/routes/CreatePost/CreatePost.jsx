@@ -1,23 +1,48 @@
 import styles from './CreatePost.module.css';
 
-import { useContext } from 'react';
-import { AuthContext } from '../../context/AuthContext';
-import { Navigate } from 'react-router-dom';
-import { useAuthValue } from '../../context/AuthContext';
+// import { useContext } from 'react';
+// import { AuthContext } from '../../context/AuthContext';
+
 import { useState } from 'react';
+import { useInsertDocument } from '../../hooks/useInsertDocuments';
 import { useNavigate } from 'react-router-dom';
+import { useAuthValue } from '../../context/AuthContext';
 
 const CreatePost = () => {
-  const { user } = useAuthValue();
-
   const [title, setTitle] = useState('');
   const [image, setImage] = useState('');
   const [body, setBody] = useState('');
   const [tags, setTags] = useState([]);
   const [formError, setFormError] = useState('');
 
+  const { user } = useAuthValue();
+
+  const navigate = useNavigate();
+
+   const { insertDocument, response } = useInsertDocument("posts");
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log('Clicou!');
+
+    setFormError('');
+
+    // validate image URL
+
+    // criar o array de tags
+
+    // checar todos os valores
+
+    insertDocument({
+      title,
+      image,
+      body,
+      tags,
+      uid: user.uid,
+      createdBy: user.displayName
+    });
+
+    // redirect to home page
   }
 
   return user ? (
@@ -46,7 +71,7 @@ const CreatePost = () => {
             required
             placeholder='Insira uma imagem que represente o seu post'
             onChange={(e) => setImage(e.target.value)}
-            value={title}
+            value={image}
           />
         </label>
 
@@ -72,11 +97,9 @@ const CreatePost = () => {
             value={tags}
           />
         </label>
-
-        <button className='btn'>Cadastrar</button>
-        {/* {!loading && <button className='btn'>Cadastrar</button>}
-        {loading && <button className='btn' disabled>Aguarde...</button>}
-        {error && <p className='error'>{error}</p>} */}
+        {!response.loading && <button className='btn'>Criar post!</button>}
+        {response.loading && (<button className='btn' disabled>Aguarde...</button>)}
+        {(response.error || formError) && <p className='error'>{response.error || formError}</p>}
       </form>
     </div>
   ) : <Navigate to='/login' />
