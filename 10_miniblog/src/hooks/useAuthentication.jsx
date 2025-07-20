@@ -41,7 +41,7 @@ export const useAuthentication = () => {
             )
 
             await updateProfile(user, {
-                displayName: data.displayNave
+                displayName: data.displayName
             })
 
             setLoading(false);

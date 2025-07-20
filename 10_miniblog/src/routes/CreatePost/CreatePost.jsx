@@ -23,15 +23,25 @@ const CreatePost = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Clicou!');
 
     setFormError('');
 
     // validate image URL
+    try {
+      new URL(image)
+    } catch (error) {
+      setFormError('A imagem precisa ser uma URL.')
+    }
 
     // criar o array de tags
+    const tagsArray = tags.split(',').map((tag)=> tag.trim().toLowerCase());
 
     // checar todos os valores
+    if(!title || !image || !tags || !body) {
+      setFormError('Por favor, preencha todos os campos!');
+    }
+
+    if(formError) return;
 
     insertDocument({
       title,
@@ -43,6 +53,7 @@ const CreatePost = () => {
     });
 
     // redirect to home page
+    navigate('/');
   }
 
   return user ? (
@@ -56,7 +67,6 @@ const CreatePost = () => {
           <input
             type="text"
             name="title"
-            required
             placeholder='Pense num bom título...'
             onChange={(e) => setTitle(e.target.value)}
             value={title}
@@ -68,7 +78,6 @@ const CreatePost = () => {
           <input
             type="text"
             name="image"
-            required
             placeholder='Insira uma imagem que represente o seu post'
             onChange={(e) => setImage(e.target.value)}
             value={image}
@@ -79,7 +88,6 @@ const CreatePost = () => {
           <span>Conteúdo: </span>
           <textarea
             name="body"
-            required
             placeholder='Insira o conteúdo do post'
             onChange={(e) => setBody(e.target.value)}
             value={body}
@@ -91,7 +99,6 @@ const CreatePost = () => {
           <input
             type="text"
             name="tags"
-            required
             placeholder='Insira as tags separadas por vírgula'
             onChange={(e) => setTags(e.target.value)}
             value={tags}
@@ -99,7 +106,8 @@ const CreatePost = () => {
         </label>
         {!response.loading && <button className='btn'>Criar post!</button>}
         {response.loading && (<button className='btn' disabled>Aguarde...</button>)}
-        {(response.error || formError) && <p className='error'>{response.error || formError}</p>}
+        {response.error && <p className='error'>{response.error || formError}</p>}
+        {formError && <p className='error'>{formError}</p>}
       </form>
     </div>
   ) : <Navigate to='/login' />

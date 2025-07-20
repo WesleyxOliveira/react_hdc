@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react'
 import { Navigate } from 'react-router-dom';
 
 const Register = () => {
-  const [displayname, setDisplayName] = useState('')
+  const [displayName, setDisplayName] = useState('')
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -20,7 +20,7 @@ const Register = () => {
     setError('');
 
     const user = {
-      displayname,
+      displayName,
       email,
       password
     }
@@ -53,10 +53,10 @@ const Register = () => {
           <span>Nome:</span>
           <input
             type="text"
-            name="displayname"
+            name="displayName"
             required
             placeholder='Nome do usuário'
-            value={displayname}
+            value={displayName}
             onChange={(e) => setDisplayName(e.target.value)} />
         </label>
 
@@ -80,7 +80,7 @@ const Register = () => {
             placeholder='Insira sua senha'
             value={password}
             onChange={(e) =>
-              setPassword(e.target.value)} />
+            setPassword(e.target.value)} />
         </label>
 
         <label>
