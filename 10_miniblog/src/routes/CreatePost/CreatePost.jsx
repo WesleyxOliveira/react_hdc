@@ -16,10 +16,11 @@ const CreatePost = () => {
   const [formError, setFormError] = useState('');
 
   const { user } = useAuthValue();
+  console.log(user);
 
-  const navigate = useNavigate();
+  const navigate = useNavigate();  
 
-   const { insertDocument, response } = useInsertDocument("posts");
+  const { insertDocument, response } = useInsertDocument("posts");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -110,7 +111,7 @@ const CreatePost = () => {
         {formError && <p className='error'>{formError}</p>}
       </form>
     </div>
-  ) : <Navigate to='/login' />
+  ) : <navigate to='/login' />
 }
 
 export default CreatePost

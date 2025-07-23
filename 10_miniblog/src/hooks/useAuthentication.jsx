@@ -29,6 +29,7 @@ export const useAuthentication = () => {
     // register
     const createUser = async (data) => {
         checkIfIsCancelled();
+        console.log(data.displayName);
 
         setLoading(true);
         setError(null);
@@ -40,7 +41,7 @@ export const useAuthentication = () => {
                 data.password
             )
 
-            await updateProfile(user, {
+            await updateProfile(user.user, {
                 displayName: data.displayName
             })
 
