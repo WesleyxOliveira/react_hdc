@@ -12,53 +12,47 @@ import {
 
 export const useFetchDocuments = (docCollection, search = null, uid = null) => {
 
-    const [documents, setDocuments] = useState(null);
+    const [documents, setDocuments] = useState([]);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(null);
 
     // deal with memory leak
     const [cancelled, setCancelled] = useState(false);
 
-    useEffect(()=> {
-        async function loadData(params) {
-            if(cancelled) return;
+    useEffect(() => {
+    async function loadData() {
+        if (cancelled) return;
 
-            setLoading(true);
+        setLoading(true);
 
-            const collectionRef = await collection(db, docCollection);
+        const collectionRef = collection(db, docCollection);
 
-            try {
-                let q
+        try {
+            let q = query(collectionRef, orderBy('createdAt', 'desc'));
 
-                // busca
-                // dashboard
+            onSnapshot(q, (querySnapshot) => {
+                setDocuments(
+                    querySnapshot.docs.map((doc) => ({
+                        id: doc.id,
+                        ...doc.data(),
+                    }))
+                );
+            });
 
-                q = await query(collectionRef, orderBy('createdAt', 'desc'));
-
-                await onSnapshot(q, (QuerySnapshot)=> {
-                    setDocuments(
-                        QuerySnapshot.docs.map((doc)=> ({
-                            id: doc.id,
-                            ...doc.data(),
-                        }))
-                    )
-                })
-
-                setLoading(false);
-            } catch (error) {
-                console.log(error);
-                setError(error.message);
-
-                setLoading(false);
-            }
-
-            loadData();
+            setLoading(false);
+        } catch (error) {
+            console.log(error);
+            setError(error.message);
+            setLoading(false);
         }
-    }, [docCollection, search, uid, cancelled])
+    }
+
+    loadData(); // ✅ Chamada real aqui
+}, [docCollection, search, uid, cancelled]);
 
     useEffect(()=> {
             return ()=> setCancelled(true);
         }, [])
 
-    return documents, loading, error;
+    return { documents, loading, error };
 }
