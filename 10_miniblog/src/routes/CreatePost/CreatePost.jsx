@@ -16,7 +16,6 @@ const CreatePost = () => {
   const [formError, setFormError] = useState('');
 
   const { user } = useAuthValue();
-  console.log(user);
 
   const navigate = useNavigate();  
 
@@ -35,12 +34,24 @@ const CreatePost = () => {
     }
 
     // criar o array de tags
-    const tagsArray = tags.split(',').map((tag)=> tag.trim().toLowerCase());
+    const tagsArray = tags.split(",").map((tag)=> tag.trim().toLowerCase());
 
     // checar todos os valores
     if(!title || !image || !tags || !body) {
       setFormError('Por favor, preencha todos os campos!');
     }
+
+    // teste aqui
+    console.log(tagsArray);
+
+     console.log({
+      title,
+      image,
+      body,
+      tags: tagsArray,
+      uid: user.uid,
+      createdBy: user.displayName,
+    });
 
     if(formError) return;
 
@@ -48,7 +59,7 @@ const CreatePost = () => {
       title,
       image,
       body,
-      tags,
+      tags: tagsArray,
       uid: user.uid,
       createdBy: user.displayName
     });
