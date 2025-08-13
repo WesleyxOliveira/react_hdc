@@ -20,39 +20,48 @@ export const useFetchDocuments = (docCollection, search = null, uid = null) => {
     const [cancelled, setCancelled] = useState(false);
 
     useEffect(() => {
-    async function loadData() {
-        if (cancelled) return;
+        async function loadData() {
+            if (cancelled) return;
 
-        setLoading(true);
+            setLoading(true);
 
-        const collectionRef = collection(db, docCollection);
+            const collectionRef = collection(db, docCollection);
 
-        try {
-            let q = query(collectionRef, orderBy('createdAt', 'desc'));
+            try {
+                let q;
+                //busca
+                // dashboard
 
-            onSnapshot(q, (querySnapshot) => {
-                setDocuments(
-                    querySnapshot.docs.map((doc) => ({
-                        id: doc.id,
-                        ...doc.data(),
-                    }))
-                );
-            });
+                if (search) {
+                    q = await query(collection, where('tags', 'array-contains', search), orderBy('createdAt', 'desc'))
+                } else {
+                    q = await query(collectionRef, orderBy('createdAt', 'desc'));
+                }
 
-            setLoading(false);
-        } catch (error) {
-            console.log(error);
-            setError(error.message);
-            setLoading(false);
+
+                onSnapshot(q, (querySnapshot) => {
+                    setDocuments(
+                        querySnapshot.docs.map((doc) => ({
+                            id: doc.id,
+                            ...doc.data(),
+                        }))
+                    );
+                });
+
+                setLoading(false);
+            } catch (error) {
+                console.log(error);
+                setError(error.message);
+                setLoading(false);
+            }
         }
-    }
 
-    loadData(); // ✅ Chamada real aqui
-}, [docCollection, search, uid, cancelled]);
+        loadData(); // Chamada real aqui
+    }, [docCollection, search, uid, cancelled]);
 
-    useEffect(()=> {
-            return ()=> setCancelled(true);
-        }, [])
+    useEffect(() => {
+        return () => setCancelled(true);
+    }, [])
 
     return { documents, loading, error };
 }

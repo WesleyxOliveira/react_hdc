@@ -15,6 +15,7 @@ import Login from './routes/Login/Login.jsx'
 import Register from './routes/Register/Register.jsx'
 import Dashboard from './routes/Dashboard/Dashboard.jsx'
 import CreatePost from './routes/CreatePost/CreatePost.jsx'
+import Search from './routes/Search/Search.jsx'
 
 // router config
 const router = createBrowserRouter([
@@ -45,7 +46,11 @@ const router = createBrowserRouter([
       {
         path: '/dashboard',
         element: <Dashboard />
-      }     
+      },
+      {
+        path: '/search',
+        element: <Search />
+      }
     ]
   }
 ])
